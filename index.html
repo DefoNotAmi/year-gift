@@ -10,7 +10,56 @@
 
 
 <style>
+.extra-section{
 
+margin-top:50px;
+
+padding-top:30px;
+
+border-top:
+
+1px solid rgba(255,255,255,.3);
+
+}
+
+
+
+.extra-section h2{
+
+font-family:Georgia;
+
+color:#ffd6e7;
+
+margin-top:40px;
+
+text-align:center;
+
+font-size:30px;
+
+text-shadow:
+
+0 0 15px pink;
+
+}
+
+
+
+.extra-section p{
+
+background:
+
+rgba(255,255,255,.05);
+
+padding:25px;
+
+border-radius:15px;
+
+border-left:
+
+3px solid pink;
+
+}
+      
 *{
 margin:0;
 padding:0;
@@ -860,29 +909,41 @@ popup.classList.remove("active");
 
 
 
-/* CLAVIER SECRET */
+/* ==========================
+      SECRET CODE SYSTEM
+========================== */
 
 
-let secret="";
+let secretCode="";
+
+const password="LOVE";
+
+<button onclick="mobileSecret()">
+🔐
+</button>
+      
+document.addEventListener("keydown", function(e){
 
 
-
-document.addEventListener("keydown",function(e){
-
-
-secret+=e.key.toUpperCase();
+let key=e.key.toUpperCase();
 
 
-
-if(secret.includes("LOVE")){
-
-
-alert(
-"🔐 CLASSIFIED EVIDENCE FOUND\n\nThe biggest clue was hidden in plain sight:\nLucas ❤️"
-);
+if(key.length===1 && key.match(/[A-Z]/)){
 
 
-secret="";
+secretCode += key;
+
+
+}
+
+
+if(secretCode.includes(password)){
+
+
+unlockSecret();
+
+
+secretCode="";
 
 
 }
@@ -893,6 +954,82 @@ secret="";
 
 
 
+
+
+function unlockSecret(){
+
+
+let secretBox=document.createElement("div");
+
+
+secretBox.className="popup active";
+
+
+secretBox.innerHTML=`
+
+<h2>
+🔐 CLASSIFIED EVIDENCE
+</h2>
+
+
+<br>
+
+
+<p>
+The hidden file has been opened.
+</p>
+
+
+<br>
+
+
+<p>
+Evidence #024-B:
+<br><br>
+
+The suspect was never a danger.
+
+<br><br>
+
+His crime:
+<br>
+
+Stealing a heart and keeping it safe forever.
+
+<br><br>
+
+Suspect:
+<b>Lucas ❤️</b>
+
+</p>
+
+
+<button onclick="this.parentElement.remove()">
+
+Close file
+
+</button>
+
+`;
+
+
+document.body.appendChild(secretBox);
+
+
+
+}
+
+function mobileSecret(){
+
+let answer=prompt("Enter classified code:");
+
+if(answer.toUpperCase()=="LOVE"){
+
+unlockSecret();
+
+}
+
+}
 
 
 
@@ -1034,6 +1171,183 @@ setTimeout(()=>h.remove(),8000);
 
 </script>
 
+      <div class="extra-section">
+
+
+<h2>
+🗂️ CASE NOTES
+</h2>
+
+
+<p class="text">
+
+Little details about Lucas:
+
+<br><br>
+
+- The thing that makes me smile:
+<br>
+[WRITE HERE]
+
+<br><br>
+
+- My favorite memory with him:
+<br>
+[WRITE HERE]
+
+<br><br>
+
+- Something only we understand:
+<br>
+[WRITE HERE]
+
+</p>
+
+
+
+<h2>
+💗 REASONS WHY YOU
+</h2>
+
+
+<p class="text">
+
+01. [A reason why Lucas is special]
+
+<br><br>
+
+02. [A little thing he does that you love]
+
+<br><br>
+
+03. [Something that makes you feel safe]
+
+<br><br>
+
+04. [A moment where he made you happy]
+
+</p>
+
+
+
+
+
+<h2>
+🌙 READ THIS WHEN YOU MISS ME
+</h2>
+
+
+<p class="text">
+
+
+If you are reading this,
+it means you need a reminder.
+
+<br><br>
+
+Even when we are far away,
+you are still part of my everyday life.
+
+<br><br>
+
+Distance is only a location.
+
+What we have is much bigger.
+
+<br><br>
+
+[ADD YOUR MESSAGE HERE]
+
+
+</p>
+
+
+
+
+
+
+<h2>
+🎬 OUR STORY
+</h2>
+
+
+<p class="text">
+
+
+Title:
+[OUR MOVIE TITLE]
+
+<br><br>
+
+
+Chapter 1:
+[HOW WE MET]
+
+<br><br>
+
+
+Chapter 2:
+[OUR FAVORITE MOMENT]
+
+<br><br>
+
+
+Final Chapter:
+[WHAT I HOPE FOR OUR FUTURE]
+
+
+</p>
+
+
+
+
+
+
+
+<h2>
+⭐ FUTURE EVIDENCE
+</h2>
+
+
+<p class="text">
+
+
+Future case files:
+
+
+<br><br>
+
+
+□ More memories together
+
+<br>
+
+□ More laughs
+
+<br>
+
+□ More adventures
+
+<br>
+
+□ A future we build together
+
+
+<br><br>
+
+
+Evidence status:
+
+<b>
+Still writing...
+</b>
+
+
+</p>
+
+
+
+</div>
 
 </body>
 
