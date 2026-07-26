@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Case #024 - Lucas Investigation</title>
+
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Courier New", monospace;
+}
+
+
+body{
+
+background:black;
+color:white;
+overflow:hidden;
+
+}
+
+
+
+/* =========================
+      ENQUETE
+========================= */
+
+
+#intro{
+
+height:100vh;
+width:100%;
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+background:
+radial-gradient(circle,#181818,#000);
+
+transition:3s;
+
+}
+
+
+
+.case{
+
+width:90%;
+max-width:850px;
+
+padding:35px;
+
+background:#111;
+
+border:1px solid #555;
+
+border-radius:20px;
+
+text-align:center;
+
+box-shadow:
+0 0 40px rgba(255,0,0,.3);
+
+}
+
+
+
+.secret{
+
+color:#ff3344;
+
+letter-spacing:5px;
+
+font-size:13px;
+
+}
+
+
+
+#role{
+
+font-size:clamp(25px,5vw,45px);
+
+font-weight:bold;
+
+margin:30px;
+
+}
+
+
+
+.cards{
+
+display:flex;
+
+gap:15px;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+}
+
+
+
+.card{
+
+background:#050505;
+
+border:1px solid #555;
+
+padding:20px;
+
+width:180px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+
+
+.card:hover{
+
+transform:scale(1.05);
+
+box-shadow:0 0 20px red;
+
+}
+
+
+
+button{
+
+margin-top:30px;
+
+padding:15px 25px;
+
+background:black;
+
+border:1px solid pink;
+
+color:white;
+
+border-radius:30px;
+
+cursor:pointer;
+
+}
+
+
+
+button:hover{
+
+background:pink;
+
+color:black;
+
+}
+
+
+
+/* POPUP */
+
+
+.popup{
+
+
+position:fixed;
+
+z-index:5;
+
+top:50%;
+
+left:50%;
+
+transform:
+translate(-50%,-50%) scale(0);
+
+
+background:#111;
+
+border:2px solid crimson;
+
+padding:30px;
+
+width:85%;
+
+max-width:500px;
+
+border-radius:20px;
+
+
+transition:.4s;
+
+
+}
+
+
+
+.popup.active{
+
+transform:
+translate(-50%,-50%) scale(1);
+
+}
+
+
+
+
+/* =========================
+     RAPPORT POLICE
+========================= */
+
+
+.report{
+
+
+margin-top:30px;
+
+padding:20px;
+
+border:1px dashed red;
+
+text-align:left;
+
+background:#080808;
+
+}
+
+
+
+.report span{
+
+color:#ff4444;
+
+}
+
+
+
+
+/* =========================
+       AMOUR
+========================= */
+
+
+#love{
+
+
+display:none;
+
+height:100vh;
+
+width:100%;
+
+background:
+
+linear-gradient(
+rgba(0,0,0,.3),
+rgba(255,100,150,.4)
+),
+
+radial-gradient(circle,#ff8fb5,#300015);
+
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+
+
+.love-box{
+
+
+width:90%;
+
+max-width:900px;
+
+max-height:90vh;
+
+overflow:auto;
+
+
+background:
+rgba(0,0,0,.55);
+
+
+padding:35px;
+
+border-radius:25px;
+
+
+box-shadow:
+
+0 0 50px pink;
+
+
+}
+
+
+
+h1{
+
+
+font-family:Georgia;
+
+text-align:center;
+
+color:#ffd6e7;
+
+font-size:50px;
+
+}
+
+
+
+.text{
+
+font-family:Georgia;
+
+font-size:20px;
+
+line-height:1.7;
+
+margin:20px 0;
+
+}
+
+
+
+/* TIMELINE */
+
+
+.timeline{
+
+
+margin-top:40px;
+
+border-left:2px solid pink;
+
+padding-left:20px;
+
+}
+
+
+
+.event{
+
+margin:25px 0;
+
+}
+
+
+
+.date{
+
+color:pink;
+
+font-weight:bold;
+
+}
+
+
+
+/* SECRET */
+
+
+#secretEvidence{
+
+display:none;
+
+}
+
+
+
+
+
+.heart{
+
+position:absolute;
+
+color:pink;
+
+animation:float 8s linear infinite;
+
+}
+
+
+
+@keyframes float{
+
+
+from{
+
+transform:translateY(100vh);
+
+}
+
+
+to{
+
+transform:translateY(-20vh);
+
+opacity:0;
+
+}
+
+
+}
+
+
+
+
+
+@media(max-width:600px){
+
+
+.card{
+
+width:100%;
+
+}
+
+
+h1{
+
+font-size:35px;
+
+}
+
+
+
+}
+
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+
+
+<div id="intro">
+
+
+<div class="case">
+
+
+<div class="secret">
+
+CONFIDENTIAL LOVE INVESTIGATION
+
+</div>
+
+
+
+<h1>
+CASE #024
+</h1>
+
+
+<p>
+Current investigation:
+</p>
+
+
+<div id="role"></div>
+
+
+
+<div class="cards">
+
+
+<div class="card" onclick="proof(0)">
+Evidence #01<br>
+Beginning
+</div>
+
+
+<div class="card" onclick="proof(1)">
+Evidence #02<br>
+Memories
+</div>
+
+
+<div class="card" onclick="proof(2)">
+Evidence #03<br>
+Truth
+</div>
+
+
+
+</div>
+
+
+
+<button id="final" onclick="finish()" disabled>
+🔒 Final Evidence
+</button>
+
+
+
+
+<div class="report">
+
+
+<h3>
+POLICE REPORT
+</h3>
+
+<br>
+
+
+Case:
+<span>#024 LOVE</span>
+
+<br><br>
+
+Suspect:
+<span>Lucas</span>
+
+<br><br>
+
+
+Crime:
+<span>Stealing someone's heart</span>
+
+
+<br><br>
+
+
+Status:
+<span>Guilty ❤️</span>
+
+
+</div>
+
+
+
+<p style="margin-top:20px;color:#777">
+
+Secret keyboard available...
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="popup" id="popup">
+
+
+<h2 id="title"></h2>
+
+<p id="desc"></p>
+
+
+<button onclick="closePop()">
+Close
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div id="love">
+
+
+<div class="love-box">
+
+
+<h1>
+The Final Evidence
+</h1>
+
+
+
+
+<div id="story"></div>
+
+
+
+<!-- TIMELINE A MODIFIER -->
+
+
+<div class="timeline">
+
+
+<h2>
+Relationship Timeline
+</h2>
+
+
+
+<div class="event">
+
+<div class="date">
+24 August 2025
+</div>
+
+First chapter of our story...
+(change this)
+
+</div>
+
+
+
+<div class="event">
+
+<div class="date">
+DATE HERE
+</div>
+
+A beautiful memory...
+(change this)
+
+</div>
+
+
+
+<div class="event">
+
+<div class="date">
+DATE HERE
+</div>
+
+The moment I knew...
+(change this)
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div id="letter">
+
+
+<h2>
+Final Letter
+</h2>
+
+
+<p class="text">
+
+Dear Lucas,
+
+<br><br>
+
+
+After solving every clue, every mystery,
+and every hidden feeling...
+
+I found the truth.
+
+<br><br>
+
+
+You were never just a part of my story.
+You became the reason why it became beautiful.
+
+<br><br>
+
+
+Thank you for every laugh,
+every memory,
+every moment.
+
+<br><br>
+
+
+If my heart was a case file,
+your name would be written on the final page.
+
+<br><br>
+
+
+Because the final evidence is simple:
+
+<br><br>
+
+
+You are the love of my life.
+
+<br><br>
+
+
+Love,
+Ami ❤️
+
+
+</p>
+
+
+</div>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<script>
+
+
+
+let roles=[
+
+["a stranger","#aaa"],
+
+["a mystery","#9b59ff"],
+
+["a missing piece","#00ffff"],
+
+["someone unforgettable","#ffd700"],
+
+["the love of my life","#ff1493"]
+
+];
+
+
+let index=0;
+
+
+function roleAnim(){
+
+
+role.innerHTML=roles[index][0];
+
+role.style.color=roles[index][1];
+
+
+index++;
+
+
+if(index<roles.length)
+
+setTimeout(roleAnim,1500);
+
+
+}
+
+
+roleAnim();
+
+
+
+
+
+
+
+let found=0;
+
+
+
+let data=[
+
+
+[
+"Evidence #01",
+"The investigation started with one simple encounter..."
+],
+
+
+[
+"Evidence #02",
+"Thousands of memories proved that this connection was real."
+],
+
+
+[
+"Evidence #03",
+"The final truth: Lucas was the person my heart was searching for."
+]
+
+
+];
+
+
+
+
+function proof(i){
+
+
+document.getElementById("title").innerHTML=data[i][0];
+
+document.getElementById("desc").innerHTML=data[i][1];
+
+
+document.getElementById("popup")
+.classList.add("active");
+
+
+found++;
+
+
+if(found>=3)
+
+document.getElementById("final").disabled=false;
+
+
+}
+
+
+
+
+
+
+function closePop(){
+
+popup.classList.remove("active");
+
+}
+
+
+
+
+
+/* CLAVIER SECRET */
+
+
+let secret="";
+
+
+
+document.addEventListener("keydown",function(e){
+
+
+secret+=e.key.toUpperCase();
+
+
+
+if(secret.includes("LOVE")){
+
+
+alert(
+"🔐 CLASSIFIED EVIDENCE FOUND\n\nThe biggest clue was hidden in plain sight:\nLucas ❤️"
+);
+
+
+secret="";
+
+
+}
+
+
+
+});
+
+
+
+
+
+
+
+function finish(){
+
+
+intro.style.opacity=0;
+
+
+
+setTimeout(()=>{
+
+
+intro.style.display="none";
+
+
+love.style.display="flex";
+
+
+typeText();
+
+
+hearts();
+
+
+},3000);
+
+
+
+}
+
+
+
+
+let paragraphs=[
+
+
+"The investigation is finally over.",
+
+
+"Every clue led to one person: Lucas.",
+
+
+"The mystery was never about finding someone...",
+
+
+"It was about discovering the love of my life."
+
+];
+
+
+let p=0;
+
+
+
+function typeText(){
+
+
+if(p<paragraphs.length){
+
+
+let x=document.createElement("p");
+
+x.className="text";
+
+story.appendChild(x);
+
+
+
+let i=0;
+
+
+function write(){
+
+
+if(i<paragraphs[p].length){
+
+x.innerHTML+=paragraphs[p][i];
+
+i++;
+
+setTimeout(write,40);
+
+}
+
+}
+
+
+write();
+
+
+p++;
+
+
+setTimeout(typeText,1500);
+
+
+}
+
+
+}
+
+
+
+
+
+
+function hearts(){
+
+
+setInterval(()=>{
+
+
+let h=document.createElement("div");
+
+h.className="heart";
+
+h.innerHTML="♥";
+
+
+h.style.left=Math.random()*100+"%";
+
+
+document.body.appendChild(h);
+
+
+setTimeout(()=>h.remove(),8000);
+
+
+
+},400);
+
+
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>
