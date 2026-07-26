@@ -560,7 +560,7 @@ Truth
 
 
 
-<button id="final" onclick="finish()" disabled>
+<button id="final" onclick="finish()" disabled style="opacity:.4">
 🔒 Final Evidence
 </button>
 
@@ -884,16 +884,33 @@ document.getElementById("popup")
 .classList.add("active");
 
 
-found++;
+
+found.add(i);
 
 
-if(found>=3)
 
-document.getElementById("final").disabled=false;
+let cards=document.querySelectorAll(".card");
 
+cards[i].style.opacity="0.5";
+
+cards[i].innerHTML += " ✓";
+
+
+
+if(found.size === 3){
+
+    let button=document.getElementById("final");
+
+    button.disabled=false;
+
+    button.style.opacity="1";
+
+    button.innerHTML="💌 Open the final evidence";
 
 }
 
+
+}
 
 
 
@@ -1037,17 +1054,16 @@ unlockSecret();
 function finish(){
 
 
-intro.style.opacity=0;
-
+document.getElementById("intro").style.opacity="0";
 
 
 setTimeout(()=>{
 
 
-intro.style.display="none";
+document.getElementById("intro").style.display="none";
 
 
-love.style.display="flex";
+document.getElementById("love").style.display="flex";
 
 
 typeText();
@@ -1057,7 +1073,6 @@ hearts();
 
 
 },3000);
-
 
 
 }
